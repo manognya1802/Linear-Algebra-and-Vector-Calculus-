@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment Set B-03</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>ASSIGNMENT SET B-03</h1>
+      <p>Linear Algebra and Its Applications</p>
+    </header>
+
+    <!-- PAGE ONE: STUDENT DETAILS -->
+    <section id="detailsPage" class="page card">
+      <h2>Student Details</h2>
+      <p class="intro">Enter your details to continue to the assignment.</p>
+
+      <form id="detailsForm">
+        <label for="studentName">Student Name</label>
+        <input id="studentName" name="studentName" type="text"
+          placeholder="Enter your full name" required>
+
+        <label for="registerNumber">Register Number</label>
+        <input id="registerNumber" name="registerNumber" type="text"
+          placeholder="Enter register number" required>
+
+        <label for="course">Course / Department</label>
+        <input id="course" name="course" type="text"
+          placeholder="e.g. CSE - AI & ML">
+
+        <label for="section">Section</label>
+        <input id="section" name="section" type="text"
+          placeholder="Enter section">
+
+        <label for="faculty">Faculty Name</label>
+        <input id="faculty" name="faculty" type="text"
+          placeholder="Enter faculty name">
+
+        <button class="primary full" type="submit">
+          Continue to Assignment
+        </button>
+      </form>
+    </section>
+
+    <!-- PAGE TWO: QUESTION MENU AND PROGRAM OUTPUT -->
+    <section id="assignmentPage" class="page hidden">
+
+      <section class="card student-summary">
+        <div>
+          <h2>Welcome, <span id="displayName">Student</span></h2>
+          <p id="studentSummary"></p>
+        </div>
+        <button id="editDetails" class="secondary" type="button">
+          Edit Details
+        </button>
+      </section>
+
+      <section class="card">
+        <h2>Assignment Questions</h2>
+        <p class="intro">
+          Select a question. Its program will execute and the result will appear below.
+        </p>
+
+        <div class="question-grid">
+          <button class="question-button" data-question="1" type="button">
+            <span>Question 1</span>
+            <small>Diagonalization of a symmetric matrix</small>
+          </button>
+
+          <button class="question-button" data-question="2" type="button">
+            <span>Question 2</span>
+            <small>Gaussian elimination and LU decomposition</small>
+          </button>
+
+          <button class="question-button" data-question="3" type="button">
+            <span>Question 3</span>
+            <small>Verify a vector in the null space</small>
+          </button>
+
+          <button class="question-button" data-question="4" type="button">
+            <span>Question 4</span>
+            <small>Three-state Markov chain simulation</small>
+          </button>
+
+          <button class="question-button" data-question="5" type="button">
+            <span>Question 5</span>
+            <small>Matrix representation of a linear transformation</small>
+          </button>
+
+          <button class="question-button" data-question="6" type="button">
+            <span>Question 6</span>
+            <small>Compute the null space of a matrix</small>
+          </button>
+
+          <button class="question-button" data-question="7" type="button">
+            <span>Question 7</span>
+            <small>Calculate the gradient</small>
+          </button>
+
+          <button class="question-button" data-question="8" type="button">
+            <span>Question 8</span>
+            <small>Visualize the gradient vector field</small>
+          </button>
+        </div>
+      </section>
+
+      <section id="programPanel" class="card hidden" aria-live="polite">
+        <div class="result-heading">
+          <div>
+            <p class="eyebrow" id="questionLabel">QUESTION</p>
+            <h2 id="programTitle">Program Output</h2>
+          </div>
+
+          <button id="clearOutput" class="secondary" type="button">
+            Clear Output
+          </button>
+        </div>
+
+        <p id="programDescription" class="intro"></p>
+
+        <div id="gradientInputs" class="input-row hidden">
+          <label for="gradientX">x value</label>
+          <input id="gradientX" type="number" value="1" step="any">
+
+          <label for="gradientY">y value</label>
+          <input id="gradientY" type="number" value="2" step="any">
+
+          <button id="calculateGradient" class="primary" type="button">
+            Calculate
+          </button>
+        </div>
+
+        <div id="result" class="output">
+          Select a question to run its program.
+        </div>
+
+        <div id="canvasWrap" class="canvas-wrap hidden">
+          <canvas id="gradientCanvas" width="720" height="420"></canvas>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <button id="backToDetails" class="secondary" type="button">
+          Back to Student Details
+        </button>
+
+        <button id="printPage" class="primary" type="button">
+          Print / Save as PDF
+        </button>
+      </footer>
+
+    </section>
+  </main>
+</body>
+</html>
