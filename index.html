@@ -2,155 +2,1090 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assignment Set B-03</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment Set B-03</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background: #f4f6f9;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 760px;
+    max-width: 100%;
+    margin: 20px auto;
+}
+
+.header {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    border-radius: 10px;
+    margin-bottom: 22px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+.header p {
+    margin-bottom: 0;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,.10);
+}
+
+h2 {
+    color: #003366;
+    margin-top: 0;
+}
+
+.intro {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin: 14px 0 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: 2px solid #b8d3ed;
+    border-color: #003366;
+}
+
+button {
+    border: 0;
+    border-radius: 5px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.primary {
+    background: #003366;
+    color: white;
+}
+
+.primary:hover {
+    background: #0055aa;
+}
+
+.secondary {
+    background: #777;
+    color: white;
+}
+
+.full {
+    width: 100%;
+    margin-top: 22px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.student-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.student-summary p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+}
+
+.question-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.question-button {
+    text-align: left;
+    background: #f4f6f9;
+    color: #003366;
+    border: 1px solid #d4dce6;
+    padding: 15px;
+    min-height: 82px;
+}
+
+.question-button:hover,
+.question-button.active {
+    background: #e4edf7;
+    border-color: #003366;
+}
+
+.question-button span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.question-button small {
+    display: block;
+    color: #555;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+.result-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.eyebrow {
+    color: #003366;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 0 5px;
+}
+
+.output {
+    min-height: 65px;
+    padding: 16px;
+    margin-top: 15px;
+    background: #f4f6f9;
+    border: 1px solid #d5dce5;
+    border-radius: 5px;
+    color: #003366;
+    font: 13px/1.65 Consolas, monospace;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.output.error {
+    color: #b00020;
+    border-color: #b00020;
+}
+
+.input-row {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.input-row label {
+    margin: 0;
+}
+
+.input-row input {
+    width: 100px;
+}
+
+.canvas-wrap {
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+}
+
+@media(max-width:560px) {
+    body {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .question-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-summary,
+    .result-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .footer button {
+        width: 100%;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .header {
+        background: white;
+        color: #003366;
+        border: 1px solid #003366;
+    }
+
+    .question-grid,
+    .footer,
+    #editDetails,
+    #clearOutput {
+        display: none !important;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+</style>
 </head>
+
 <body>
-  <main class="container">
-    <header class="header">
-      <h1>ASSIGNMENT SET B-03</h1>
-      <p>Linear Algebra and Its Applications</p>
-    </header>
 
-    <!-- PAGE ONE: STUDENT DETAILS -->
-    <section id="detailsPage" class="page card">
-      <h2>Student Details</h2>
-      <p class="intro">Enter your details to continue to the assignment.</p>
+<div class="container">
 
-      <form id="detailsForm">
+<header class="header">
+    <h1>ASSIGNMENT SET B-03</h1>
+    <p>Linear Algebra and Its Applications</p>
+</header>
+
+<!-- PAGE 1: STUDENT DETAILS -->
+
+<section id="detailsPage" class="card">
+
+    <h2>Student Details</h2>
+    <p class="intro">Enter your details to continue to the assignment.</p>
+
+    <form id="detailsForm">
+
         <label for="studentName">Student Name</label>
-        <input id="studentName" name="studentName" type="text"
-          placeholder="Enter your full name" required>
+        <input type="text" id="studentName"
+        placeholder="Enter your full name" required>
 
         <label for="registerNumber">Register Number</label>
-        <input id="registerNumber" name="registerNumber" type="text"
-          placeholder="Enter register number" required>
+        <input type="text" id="registerNumber"
+        placeholder="Enter register number" required>
 
         <label for="course">Course / Department</label>
-        <input id="course" name="course" type="text"
-          placeholder="e.g. CSE - AI & ML">
+        <input type="text" id="course"
+        placeholder="e.g. CSE - AI & ML">
 
         <label for="section">Section</label>
-        <input id="section" name="section" type="text"
-          placeholder="Enter section">
+        <input type="text" id="section"
+        placeholder="Enter section">
+
+        <label for="faculty">Faculty Name</label>
+        <input type="text" id="faculty"
+        placeholder="Enter faculty name">
 
         <button class="primary full" type="submit">
-          Continue to Assignment
+            Continue to Assignment
         </button>
-      </form>
+
+    </form>
+</section>
+
+<!-- PAGE 2: ASSIGNMENT -->
+
+<section id="assignmentPage" class="hidden">
+
+    <section class="card student-summary">
+        <div>
+            <h2>Welcome, <span id="displayName">Student</span></h2>
+            <p id="studentSummary"></p>
+        </div>
+
+        <button id="editDetails" class="secondary" type="button">
+            Edit Details
+        </button>
     </section>
 
-    <!-- PAGE TWO: QUESTION MENU AND PROGRAM OUTPUT -->
-    <section id="assignmentPage" class="page hidden">
+    <section class="card">
 
-      <section class="card student-summary">
-        <div>
-          <h2>Welcome, <span id="displayName">Student</span></h2>
-          <p id="studentSummary"></p>
-        </div>
-        <button id="editDetails" class="secondary" type="button">
-          Edit Details
-        </button>
-      </section>
-
-      <section class="card">
         <h2>Assignment Questions</h2>
+
         <p class="intro">
-          Select a question. Its program will execute and the result will appear below.
+            Select a question to execute its program and view the output.
         </p>
 
         <div class="question-grid">
-          <button class="question-button" data-question="1" type="button">
-            <span>Question 1</span>
-            <small>Diagonalization of a symmetric matrix</small>
-          </button>
 
-          <button class="question-button" data-question="2" type="button">
-            <span>Question 2</span>
-            <small>Gaussian elimination and LU decomposition</small>
-          </button>
+            <button class="question-button" data-q="1" type="button">
+                <span>Question 1</span>
+                <small>Diagonalization of a symmetric matrix</small>
+            </button>
 
-          <button class="question-button" data-question="3" type="button">
-            <span>Question 3</span>
-            <small>Verify a vector in the null space</small>
-          </button>
+            <button class="question-button" data-q="2" type="button">
+                <span>Question 2</span>
+                <small>Gaussian elimination and LU decomposition</small>
+            </button>
 
-          <button class="question-button" data-question="4" type="button">
-            <span>Question 4</span>
-            <small>Three-state Markov chain simulation</small>
-          </button>
+            <button class="question-button" data-q="3" type="button">
+                <span>Question 3</span>
+                <small>Null space verification</small>
+            </button>
 
-          <button class="question-button" data-question="5" type="button">
-            <span>Question 5</span>
-            <small>Matrix representation of a linear transformation</small>
-          </button>
+            <button class="question-button" data-q="4" type="button">
+                <span>Question 4</span>
+                <small>Three-state Markov chain simulation</small>
+            </button>
 
-          <button class="question-button" data-question="6" type="button">
-            <span>Question 6</span>
-            <small>Compute the null space of a matrix</small>
-          </button>
+            <button class="question-button" data-q="5" type="button">
+                <span>Question 5</span>
+                <small>Linear transformation</small>
+            </button>
 
-          <button class="question-button" data-question="7" type="button">
-            <span>Question 7</span>
-            <small>Calculate the gradient</small>
-          </button>
+            <button class="question-button" data-q="6" type="button">
+                <span>Question 6</span>
+                <small>Null-space basis using RREF</small>
+            </button>
 
-          <button class="question-button" data-question="8" type="button">
-            <span>Question 8</span>
-            <small>Visualize the gradient vector field</small>
-          </button>
+            <button class="question-button" data-q="7" type="button">
+                <span>Question 7</span>
+                <small>Gradient calculation</small>
+            </button>
+
+            <button class="question-button" data-q="8" type="button">
+                <span>Question 8</span>
+                <small>Gradient vector field visualization</small>
+            </button>
+
         </div>
-      </section>
+    </section>
 
-      <section id="programPanel" class="card hidden" aria-live="polite">
+    <!-- OUTPUT PANEL -->
+
+    <section id="programPanel" class="card hidden">
+
         <div class="result-heading">
-          <div>
-            <p class="eyebrow" id="questionLabel">QUESTION</p>
-            <h2 id="programTitle">Program Output</h2>
-          </div>
+            <div>
+                <p class="eyebrow" id="questionLabel">QUESTION</p>
+                <h2 id="programTitle">Program Output</h2>
+            </div>
 
-          <button id="clearOutput" class="secondary" type="button">
-            Clear Output
-          </button>
+            <button id="clearOutput" class="secondary" type="button">
+                Clear Output
+            </button>
         </div>
 
         <p id="programDescription" class="intro"></p>
 
         <div id="gradientInputs" class="input-row hidden">
-          <label for="gradientX">x value</label>
-          <input id="gradientX" type="number" value="1" step="any">
 
-          <label for="gradientY">y value</label>
-          <input id="gradientY" type="number" value="2" step="any">
+            <div>
+                <label for="gradientX">x value</label>
+                <input type="number" id="gradientX" value="1" step="any">
+            </div>
 
-          <button id="calculateGradient" class="primary" type="button">
-            Calculate
-          </button>
+            <div>
+                <label for="gradientY">y value</label>
+                <input type="number" id="gradientY" value="2" step="any">
+            </div>
+
+            <button id="calculateGradient" class="primary" type="button">
+                Calculate
+            </button>
+
         </div>
 
         <div id="result" class="output">
-          Select a question to run its program.
+            Select a question to run its program.
         </div>
 
         <div id="canvasWrap" class="canvas-wrap hidden">
-          <canvas id="gradientCanvas" width="720" height="420"></canvas>
+            <canvas id="gradientCanvas" width="720" height="420"></canvas>
         </div>
-      </section>
 
-      <footer class="footer">
+    </section>
+
+    <footer class="footer">
+
         <button id="backToDetails" class="secondary" type="button">
-          Back to Student Details
+            Back to Student Details
         </button>
 
         <button id="printPage" class="primary" type="button">
-          Print / Save as PDF
+            Print / Save as PDF
         </button>
-      </footer>
 
-    </section>
-  </main>
+    </footer>
+
+</section>
+
+</div>
+
+<script>
+
+// BASIC HELPER FUNCTIONS
+
+const $ = id => document.getElementById(id);
+
+const fmt = n => Number(n.toFixed(6));
+
+const identity = n =>
+    Array.from({length:n}, (_,i) =>
+        Array.from({length:n}, (_,j) => i===j ? 1 : 0)
+    );
+
+const titles = {
+    1: "Diagonalization of a Symmetric Matrix",
+    2: "Gaussian Elimination and LU Decomposition",
+    3: "Null Space Verification",
+    4: "Three-State Markov Chain Simulation",
+    5: "Matrix Representation of a Linear Transformation",
+    6: "Computing the Null Space",
+    7: "Gradient Calculation",
+    8: "Gradient Vector Field Visualization"
+};
+
+const descriptions = {
+    1: "Jacobi eigenvalue algorithm for a symmetric matrix.",
+    2: "Solves a system using Gaussian elimination and LU decomposition.",
+    3: "Checks whether Ax equals the zero vector.",
+    4: "Simulates transitions between three states.",
+    5: "Finds the matrix representation of a linear transformation.",
+    6: "Finds a basis for the null space using RREF.",
+    7: "Calculates partial derivatives at the selected point.",
+    8: "Displays the gradient vector field."
+};
+
+function output(text, error=false) {
+    $("result").textContent = text;
+    $("result").classList.toggle("error",error);
+}
+
+// QUESTION 1: JACOBI DIAGONALIZATION
+
+function jacobi(A) {
+    const n=A.length;
+    const D=A.map(r=>r.slice());
+    const Q=identity(n);
+
+    for(let it=0;it<100*n*n;it++) {
+        let p=0,q=1,max=0;
+
+        for(let i=0;i<n;i++) {
+            for(let j=i+1;j<n;j++) {
+                if(Math.abs(D[i][j])>max) {
+                    max=Math.abs(D[i][j]);
+                    p=i;
+                    q=j;
+                }
+            }
+        }
+
+        if(max<1e-10) break;
+
+        const theta=.5*Math.atan2(
+            2*D[p][q],
+            D[q][q]-D[p][p]
+        );
+
+        const c=Math.cos(theta);
+        const s=Math.sin(theta);
+
+        const app=c*c*D[p][p]-2*s*c*D[p][q]+s*s*D[q][q];
+        const aqq=s*s*D[p][p]+2*s*c*D[p][q]+c*c*D[q][q];
+
+        for(let k=0;k<n;k++) {
+            if(k!==p && k!==q) {
+                const x=D[k][p];
+                const y=D[k][q];
+
+                D[k][p]=D[p][k]=c*x-s*y;
+                D[k][q]=D[q][k]=s*x+c*y;
+            }
+        }
+
+        D[p][p]=app;
+        D[q][q]=aqq;
+        D[p][q]=D[q][p]=0;
+
+        for(let k=0;k<n;k++) {
+            const x=Q[k][p];
+            const y=Q[k][q];
+
+            Q[k][p]=c*x-s*y;
+            Q[k][q]=s*x+c*y;
+        }
+    }
+
+    return {D,Q};
+}
+
+// QUESTION 2: GAUSSIAN ELIMINATION
+
+function gaussian(A,b) {
+    const n=b.length;
+    const M=A.map((r,i)=>[...r,b[i]]);
+
+    for(let k=0;k<n;k++) {
+        let p=k;
+
+        for(let i=k+1;i<n;i++) {
+            if(Math.abs(M[i][k])>Math.abs(M[p][k])) p=i;
+        }
+
+        [M[k],M[p]]=[M[p],M[k]];
+
+        if(Math.abs(M[k][k])<1e-12)
+            throw Error("Singular matrix.");
+
+        for(let i=k+1;i<n;i++) {
+            const f=M[i][k]/M[k][k];
+
+            for(let j=k;j<=n;j++)
+                M[i][j]-=f*M[k][j];
+        }
+    }
+
+    const x=Array(n).fill(0);
+
+    for(let i=n-1;i>=0;i--) {
+        let s=M[i][n];
+
+        for(let j=i+1;j<n;j++)
+            s-=M[i][j]*x[j];
+
+        x[i]=s/M[i][i];
+    }
+
+    return x;
+}
+
+// LU DECOMPOSITION
+
+function luSolve(A,b) {
+    const n=b.length;
+    const L=identity(n);
+    const U=A.map(r=>r.slice());
+
+    for(let k=0;k<n;k++) {
+        if(Math.abs(U[k][k])<1e-12)
+            throw Error("Zero pivot in LU decomposition.");
+
+        for(let i=k+1;i<n;i++) {
+            const f=U[i][k]/U[k][k];
+            L[i][k]=f;
+
+            for(let j=k;j<n;j++)
+                U[i][j]-=f*U[k][j];
+        }
+    }
+
+    const y=Array(n).fill(0);
+    const x=Array(n).fill(0);
+
+    for(let i=0;i<n;i++) {
+        y[i]=b[i];
+
+        for(let j=0;j<i;j++)
+            y[i]-=L[i][j]*y[j];
+    }
+
+    for(let i=n-1;i>=0;i--) {
+        x[i]=y[i];
+
+        for(let j=i+1;j<n;j++)
+            x[i]-=U[i][j]*x[j];
+
+        x[i]/=U[i][i];
+    }
+
+    return {x,L,U};
+}
+
+// QUESTION 3: NULL SPACE VERIFICATION
+
+function matVec(A,x) {
+    return A.map(r =>
+        r.reduce((s,v,j)=>s+v*x[j],0)
+    );
+}
+
+// QUESTION 4: MARKOV CHAIN
+
+function markov(P,start,steps) {
+    let state=start;
+    const seq=[state];
+
+    for(let k=0;k<steps;k++) {
+        const r=Math.random();
+        let sum=0;
+
+        for(let j=0;j<P.length;j++) {
+            sum+=P[state][j];
+
+            if(r<sum || j===P.length-1) {
+                state=j;
+                break;
+            }
+        }
+
+        seq.push(state);
+    }
+
+    return seq;
+}
+
+// QUESTION 5: LINEAR TRANSFORMATION
+
+function transform(x,y) {
+    return [2*x+y,x+3*y];
+}
+
+// QUESTION 6: NULL SPACE USING RREF
+
+function nullSpace(A) {
+    const R=A.map(r=>r.slice());
+    const m=R.length;
+    const n=R[0].length;
+    const pivots=[];
+
+    let row=0;
+
+    for(let col=0;col<n && row<m;col++) {
+        let p=row;
+
+        for(let i=row+1;i<m;i++) {
+            if(Math.abs(R[i][col])>Math.abs(R[p][col]))
+                p=i;
+        }
+
+        if(Math.abs(R[p][col])<1e-10) continue;
+
+        [R[row],R[p]]=[R[p],R[row]];
+
+        const d=R[row][col];
+
+        for(let j=0;j<n;j++) R[row][j]/=d;
+
+        for(let i=0;i<m;i++) {
+            if(i!==row) {
+                const f=R[i][col];
+
+                for(let j=0;j<n;j++)
+                    R[i][j]-=f*R[row][j];
+            }
+        }
+
+        pivots.push(col);
+        row++;
+    }
+
+    const free=Array.from({length:n},(_,i)=>i)
+        .filter(c=>!pivots.includes(c));
+
+    const basis=free.map(f=>{
+        const v=Array(n).fill(0);
+        v[f]=1;
+
+        pivots.forEach((p,i)=>{
+            v[p]=-R[i][f];
+        });
+
+        return v;
+    });
+
+    return {R,pivots,free,basis};
+}
+
+// QUESTION 7: GRADIENT
+
+function gradient(x,y) {
+    return [3*x*x+2*y,2*x+2*y];
+}
+
+// QUESTION 8: GRADIENT VECTOR FIELD
+
+function drawField() {
+    const c=$("gradientCanvas");
+    const ctx=c.getContext("2d");
+
+    const w=c.width;
+    const h=c.height;
+    const s=42;
+    const ox=w/2;
+    const oy=h/2;
+
+    ctx.clearRect(0,0,w,h);
+
+    ctx.strokeStyle="#e2e7ee";
+    ctx.lineWidth=1;
+
+    for(let x=0;x<=w;x+=s) {
+        ctx.beginPath();
+        ctx.moveTo(x,0);
+        ctx.lineTo(x,h);
+        ctx.stroke();
+    }
+
+    for(let y=0;y<=h;y+=s) {
+        ctx.beginPath();
+        ctx.moveTo(0,y);
+        ctx.lineTo(w,y);
+        ctx.stroke();
+    }
+
+    ctx.strokeStyle="#555";
+    ctx.beginPath();
+    ctx.moveTo(0,oy);
+    ctx.lineTo(w,oy);
+    ctx.moveTo(ox,0);
+    ctx.lineTo(ox,h);
+    ctx.stroke();
+
+    ctx.fillStyle="#333";
+    ctx.font="13px Arial";
+    ctx.fillText("x",w-18,oy-8);
+    ctx.fillText("y",ox+8,15);
+
+    for(let x=-7;x<=7;x++) {
+        for(let y=-4;y<=4;y++) {
+            const [gx,gy]=gradient(x/2,y/2);
+            const mag=Math.hypot(gx,gy);
+
+            if(mag<1e-8) continue;
+
+            const len=Math.min(23,5+mag*.35);
+            const dx=gx/mag*len;
+            const dy=-gy/mag*len;
+
+            const px=ox+x/2*s;
+            const py=oy-y/2*s;
+            const a=Math.atan2(dy,dx);
+
+            ctx.strokeStyle="#003366";
+            ctx.fillStyle="#003366";
+            ctx.lineWidth=1.8;
+
+            ctx.beginPath();
+            ctx.moveTo(px,py);
+            ctx.lineTo(px+dx,py+dy);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(px+dx,py+dy);
+            ctx.lineTo(
+                px+dx-6*Math.cos(a-.48),
+                py+dy-6*Math.sin(a-.48)
+            );
+            ctx.lineTo(
+                px+dx-6*Math.cos(a+.48),
+                py+dy-6*Math.sin(a+.48)
+            );
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+}
+
+// RUN QUESTIONS
+
+function runQuestion(n) {
+    try {
+        if(n===1) {
+            const A=[[4,1,1],[1,3,0],[1,0,2]];
+            const {D,Q}=jacobi(A);
+
+            output(
+                "Input Matrix A:\n"+JSON.stringify(A)+
+                "\n\nDiagonal Matrix D:\n"+
+                JSON.stringify(D.map((r,i)=>
+                    r.map((v,j)=>i===j?fmt(v):0)
+                ))+
+                "\n\nOrthogonal Matrix Q:\n"+
+                JSON.stringify(Q.map(r=>r.map(fmt)))+
+                "\n\nA = Q D Qᵀ (within numerical rounding)."
+            );
+        }
+
+        else if(n===2) {
+            const A=[[3,1,-1],[2,4,1],[-1,2,5]];
+            const b=[4,1,1];
+
+            const g=gaussian(A,b);
+            const lu=luSolve(A,b);
+
+            output(
+                "Matrix A:\n"+JSON.stringify(A)+
+                "\nVector b:\n"+JSON.stringify(b)+
+                "\n\nGaussian Elimination Solution:\n"+
+                JSON.stringify(g.map(fmt))+
+                "\n\nLU Decomposition Solution:\n"+
+                JSON.stringify(lu.x.map(fmt))+
+                "\n\nL Matrix:\n"+
+                JSON.stringify(lu.L.map(r=>r.map(fmt)))+
+                "\n\nU Matrix:\n"+
+                JSON.stringify(lu.U.map(r=>r.map(fmt)))
+            );
+        }
+
+        else if(n===3) {
+            const A=[[1,2,1],[2,4,2]];
+            const x=[1,0,-1];
+            const ax=matVec(A,x);
+            const ok=ax.every(v=>Math.abs(v)<1e-9);
+
+            output(
+                "Matrix A:\n"+JSON.stringify(A)+
+                "\nVector x:\n"+JSON.stringify(x)+
+                "\n\nAx = "+JSON.stringify(ax)+
+                "\n\n"+(ok
+                    ?"The vector belongs to the null space because Ax = 0."
+                    :"The vector does not belong to the null space.")
+            );
+        }
+
+        else if(n===4) {
+            const P=[
+                [.5,.3,.2],
+                [.2,.6,.2],
+                [.3,.2,.5]
+            ];
+
+            const names=["A","B","C"];
+            const seq=markov(P,0,20).map(i=>names[i]);
+
+            output(
+                "Transition Matrix:\n"+JSON.stringify(P)+
+                "\n\nStarting State: A"+
+                "\n\n20 Transitions:\n"+seq.join(" → ")+
+                "\n\nThe sequence changes on each run."
+            );
+        }
+
+        else if(n===5) {
+            const a=transform(1,0);
+            const b=transform(0,1);
+
+            const M=[
+                [a[0],b[0]],
+                [a[1],b[1]]
+            ];
+
+            output(
+                "T(1,0) = "+JSON.stringify(a)+
+                "\nT(0,1) = "+JSON.stringify(b)+
+                "\n\nMatrix Representation:\n"+
+                JSON.stringify(M)+
+                "\n\nT(x,y) = (2x+y, x+3y)"
+            );
+        }
+
+        else if(n===6) {
+            const A=[[1,2,1],[2,4,2]];
+            const r=nullSpace(A);
+
+            output(
+                "Matrix A:\n"+JSON.stringify(A)+
+                "\n\nRREF(A):\n"+
+                JSON.stringify(r.R.map(row=>row.map(fmt)))+
+                "\n\nPivot Columns: "+
+                r.pivots.map(v=>v+1).join(", ")+
+                "\nFree Columns: "+
+                r.free.map(v=>v+1).join(", ")+
+                "\n\nBasis for Null Space:\n"+
+                r.basis.map(v=>JSON.stringify(v.map(fmt))).join("\n")+
+                "\n\nNullity = "+r.basis.length
+            );
+        }
+
+        else if(n===7) {
+            const x=Number($("gradientX").value);
+            const y=Number($("gradientY").value);
+
+            if(!Number.isFinite(x)||!Number.isFinite(y)) {
+                output("Enter valid values for x and y.",true);
+                return;
+            }
+
+            const [gx,gy]=gradient(x,y);
+
+            output(
+                "f(x,y) = x³ + 2xy + y²"+
+                "\n\nAt ("+x+", "+y+"):"+
+                "\n∂f/∂x = 3x² + 2y = "+fmt(gx)+
+                "\n∂f/∂y = 2x + 2y = "+fmt(gy)+
+                "\n\nGradient = ("+fmt(gx)+", "+fmt(gy)+")"
+            );
+        }
+
+        else if(n===8) {
+            drawField();
+
+            output(
+                "Gradient vector field drawn for "+
+                "∇f(x,y) = (3x² + 2y, 2x + 2y)."+
+                "\nEach arrow shows the direction of steepest increase."
+            );
+        }
+
+    } catch(e) {
+        output("Error: "+e.message,true);
+    }
+}
+
+// PAGE NAVIGATION
+
+$("detailsForm").addEventListener("submit",function(event) {
+    event.preventDefault();
+
+    const name=$("studentName").value.trim();
+    const roll=$("registerNumber").value.trim();
+
+    if(!name || !roll) {
+        alert("Please enter your name and register number.");
+        return;
+    }
+
+    $("displayName").textContent=name;
+
+    $("studentSummary").textContent=
+        "Register No: "+roll+
+        " | Course: "+$("course").value+
+        " | Section: "+$("section").value+
+        " | Faculty: "+$("faculty").value;
+
+    $("detailsPage").classList.add("hidden");
+    $("assignmentPage").classList.remove("hidden");
+
+    window.scrollTo(0,0);
+
+    try {
+        localStorage.setItem("b03Student",JSON.stringify({
+            name:name,
+            roll:roll,
+            course:$("course").value,
+            section:$("section").value,
+            faculty:$("faculty").value
+        }));
+    } catch(e) {
+        // The form still works if browser storage is unavailable.
+    }
+});
+
+// QUESTION BUTTON EVENTS
+
+document.querySelectorAll(".question-button").forEach(button=>{
+    button.addEventListener("click",function() {
+        const n=Number(this.dataset.q);
+
+        $("programPanel").classList.remove("hidden");
+        $("questionLabel").textContent="QUESTION "+n;
+        $("programTitle").textContent=titles[n];
+        $("programDescription").textContent=descriptions[n];
+
+        $("gradientInputs").classList.toggle("hidden",n!==7);
+        $("canvasWrap").classList.toggle("hidden",n!==8);
+
+        document.querySelectorAll(".question-button").forEach(b=>{
+            b.classList.toggle("active",b===this);
+        });
+
+        runQuestion(n);
+
+        $("programPanel").scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+    });
+});
+
+// EDIT DETAILS
+
+$("editDetails").addEventListener("click",()=>{
+    $("assignmentPage").classList.add("hidden");
+    $("detailsPage").classList.remove("hidden");
+    window.scrollTo(0,0);
+});
+
+$("backToDetails").addEventListener("click",()=>{
+    $("assignmentPage").classList.add("hidden");
+    $("detailsPage").classList.remove("hidden");
+    window.scrollTo(0,0);
+});
+
+// CLEAR OUTPUT
+
+$("clearOutput").addEventListener("click",()=>{
+    $("programPanel").classList.add("hidden");
+
+    document.querySelectorAll(".question-button").forEach(b=>{
+        b.classList.remove("active");
+    });
+});
+
+// GRADIENT CALCULATOR
+
+$("calculateGradient").addEventListener("click",()=>{
+    runQuestion(7);
+});
+
+// PRINT
+
+$("printPage").addEventListener("click",()=>{
+    window.print();
+});
+
+// RESTORE STUDENT DETAILS
+
+try {
+    const saved=JSON.parse(localStorage.getItem("b03Student")||"null");
+
+    if(saved) {
+        $("studentName").value=saved.name||"";
+        $("registerNumber").value=saved.roll||"";
+        $("course").value=saved.course||"";
+        $("section").value=saved.section||"";
+        $("faculty").value=saved.faculty||"";
+    }
+} catch(e) {
+    // Ignore unavailable or invalid saved data.
+}
+
+</script>
+
 </body>
 </html>
